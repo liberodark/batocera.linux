@@ -5,7 +5,7 @@ libretro:
   features: [ratio, smooth, shaders, pixel_perfect, decoration, game_translation]
   cfeatures:
     gfxbackend:
-      archs_include: [x86, x86_64, rpi4, odroidgoa]
+      archs_include: [x86, x86_64, rpi4]
       prompt:      GRAPHICS BACKEND
       description: Choose your graphics rendering
       choices:
@@ -20,18 +20,18 @@ libretro:
                 prompt:      COLORISATION
                 description: Enable the Chroma 81 interface
                 choices:
-                    "Autodetect":  automatic
-                    "Off":         disabled
-                    "On (forced)": enabled
+                    "Automatic": automatic
+                    "Off":       disabled
+                    "On":        enabled
             81_highres:
                 prompt:      HIGH RESOLUTION
                 description: Enables WRX high resolution module
                 choices:
-                    "Autodetect":  automatic
-                    "Off":         none
-                    "On (forced)": WRX
+                    "Automatic": automatic
+                    "Off":       none
+                    "On":        WRX
     atari800:
-      features: [latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
       systems:
             atari800:
                 cfeatures:
@@ -42,9 +42,6 @@ libretro:
                             "400/600XL/800 (48K) (OS B)": 400/800 (OS B)
                             "800XL/1200XL/XEGS (64K)":    800XL (64K)
                             "130XE (128K)":               130XE (128K)
-                            "Modern XL/XE (320K CS)":     Modern XL/XE(320K CS)
-                            "Modern XL/XE (576K)":        Modern XL/XE(576K)
-                            "Modern XL/XE (1088K)":       Modern XL/XE(1088K)
                     atari800_ntscpal:
                         prompt:      VIDEO STANDARD
                         description: Switch frequency and resolution by region
@@ -82,11 +79,9 @@ libretro:
                             "Off":     disabled
                             "On":      enabled
     beetle-saturn:
-      features: [netplay, autosave, latency_reduction, cheevos]
-    fmsx:
-       features: [netplay, rewind, autosave, latency_reduction]
+      features: [netplay,         autosave, latency_reduction, cheevos]
     bluemsx:
-      features: [rewind, autosave, latency_reduction, padtokeyboard, cheevos]
+      features: [         rewind, autosave, latency_reduction, padtokeyboard, cheevos]
       cfeatures:
             bluemsx_nospritelimits:
                 prompt:      REDUCE SPRITE FLICKERING
@@ -116,9 +111,9 @@ libretro:
                     "512":   512
                     "576+":  576
     citra:
-      features: [rewind, autosave, latency_reduction]
+      features: [         rewind, autosave, latency_reduction]
     daphne:
-      features: [latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
     desmume:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
       cfeatures:
@@ -151,7 +146,7 @@ libretro:
                     "On":  enabled
             multisampling:
                 prompt:      ANTI-ALIASING (MSAA)
-                description: Smooth out jagged edges on 3D objetcs polygons
+                description: Smooth out jagged edges on 3D objetcs polygons 
                 choices:
                     "Off": disabled
                     "2x":  2
@@ -186,35 +181,12 @@ libretro:
                     "7":   7
                     "8":   8
                     "9":   9
-    melonds:
-      features: [autosave, latency_reduction]
-      cfeatures:
-            melonds_boot_directly:
-                prompt:      SKIP DS SYSTEM MENU
-                description: Use it to configure options like time and language
-                choices:
-                    "Off": disabled
-                    "On":  enabled
-            melonds_screen_layout:
-                prompt:      SCREEN LAYOUT
-                description: Allows you to arrange the DS screens
-                choices:
-                    "top/bottom":            Top/Bottom
-                    "bottom/top":            Bottom/Top
-                    "left/right":            Left/Right
-                    "right/left":            Right/Left
-                    "top only":              Top Only
-                    "bottom only":           Bottom Only
-                    "hybrid top ratio 2":    Hybrid Top-Ratio2
-                    "hybrid top ratio 3":    Hybrid Top-Ratio3
-                    "hybrid bottom ratio 2": Hybrid Bottom-Ratio2
-                    "hybrid bottom ratio 3": Hybrid Bottom-Ratio3
     devilutionx:
-      features: []
+      features: [ ]
     dolphin:
-      features: []
+      features: [ ]
     dosbox:
-      features: [latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
       cfeatures:
             core_timing:
                 prompt:      CPU TIMING MODE (FPS)
@@ -245,171 +217,8 @@ libretro:
                     "rgb3x":       rgb3x
                     "scan2x":      scan2x
                     "scan3x":      scan3x
-            controller1_dosbox:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select Keyboard, Joystick or Gamepad mode
-                choices:
-                    "Gamepad (D-pad, 2 Buttons)":   1
-                    "Keyboard + Mouse":             3
-                    "Joystick (2 Axes, 2 Buttons)": 517
-            controller2_dosbox:
-                prompt:      CONTROLLER 2 TYPE
-                description: Select Keyboard, Joystick or Gamepad mode
-                choices:
-                    "Gamepad (D-pad, 2 Buttons)":   1
-                    "Keyboard + Mouse":             3
-                    "Joystick (2 Axes, 2 Buttons)": 517
-    dosbox_pure:
-      features: [latency_reduction, padtokeyboard]
-      cfeatures:
-            pure_cpu_type:
-                prompt:      CPU TYPE
-                description: Select the fine CPU type for your game
-                choices:
-                    "Autodetect (Compatible)": automatic
-                    "386":                     386
-                    "386 (slow)":              386_slow
-                    "386 (prefetch)":          386_prefetch
-                    "486 (slow)":              486_slow
-                    "Pentium (slow)":          pentium_slow
-            pure_cpu_core:
-                prompt:      CPU CORE METHOD
-                description: Choose an accurate or fastest method
-                choices:
-                    "Optimized (auto)":                             automatic
-                    "Dynamic (fast)":                               dynamic
-                    "Normal (interpreter)":                         normal
-                    "Simple (interpreter for old real-mode games)": simple
-            pure_cycles:
-                prompt:      CPU EMULATED PERFORMANCE
-                description: Select CPU cycles by model. Use with caution
-                choices:
-                    "Autodetect (Compatible)":          automatic
-                    "MAX (as many as possible)":        max
-                    "8086/8088, 4.77MHz (315 cps)":     315
-                    "286, 6MHz (1320 cps)":             1320
-                    "286, 12.5MHz (2750 cps)":          2750
-                    "386, 20MHz (4720 cps)":            4720
-                    "386DX, 33MHz (7800 cps)":          7800
-                    "486DX, 33MHz (13400 cps)":         13400
-                    "486DX2, 66MHz (26800 cps)":        26800
-                    "Pentium, 100MHz (77000 cps)":      77000
-                    "Pentium II, 300MHz (200000 cps)":  200000
-                    "Pentium III, 600MHz (500000 cps)": 500000
-                    "AMD Athlon, 1.2GHz (1000000 cps)": 1000000
-            pure_memory_size:
-                prompt:      RAM SIZE
-                description: The amount of RAM for the emulated machine
-                choices:
-                    "No EMS/XMS":           none
-                    "4MB":                  4
-                    "8MB":                  8
-                    "16MB":                 16
-                    "24MB":                 24
-                    "32MB":                 32
-                    "48MB":                 48
-                    "64MB":                 64
-            pure_machine:
-                prompt:      GRAPHICS CHIP TYPE
-                description: Video card graphic chip type
-                choices:
-                    "SVGA":                 svga
-                    "VGA":                  vga
-                    "EGA":                  ega
-                    "CGA":                  cga
-                    "Tandy":                tandy
-                    "Hercules":             hercules
-                    "PCjr":                 pcjr
-            pure_keyboard_layout:
-                prompt:      KEYBOARD LAYOUT
-                description: Select physical keyboard layout (not On Screen)
-                choices:
-                    "US":                   us
-                    "UK":                   uk
-                    "Brazil":               br
-                    "Croatia":              hr
-                    "Czech Republic":       cz243
-                    "Denmark":              dk
-                    "Finland":              su
-                    "France":               fr
-                    "Germany":              gr
-                    "Greece":               gk
-                    "Hungary":              hu
-                    "Iceland":              is161
-                    "Italy":                it
-                    "Netherlands":          nl
-                    "Norway":               "no"
-                    "Poland":               pl
-                    "Portugal":             po
-                    "Russia":               ru
-                    "Slovakia":             sk
-                    "Slovenia":             si
-                    "Spain":                sp
-                    "Sweden":               sv
-                    "Switzerland (German)": sg
-                    "Switzerland (French)": sf
-                    "Turkey":               tr
-            pure_savestate:
-                prompt:      SAVESTATE / REWIND
-                description: Enable or not Savestate and Rewind support
-                choices:
-                    "On":                     on
-                    "On with rewind support": rewind
-                    "Off":                    disabled
-            pure_auto_mapping:
-                prompt:      GAMEPAD AUTOMATIC MAPPING
-                description: Apply a gamepad mapping scheme for selected game
-                choices:
-                    "On":                             "true"
-                    "On with game detection message": notify
-                    "Off":                            "false"
-            pure_joystick_analog_deadzone:
-                prompt:      JOYSTICK ANALOG DEADZONE
-                description: Set the deadzone of the joystick analog sticks
-                choices:
-                    "0%":                  0
-                    "5%":                  5
-                    "10%":                 10
-                    "15%":                 15
-                    "20%":                 20
-                    "25%":                 25
-                    "30%":                 30
-                    "35%":                 35
-                    "40%":                 40
-            pure_joystick_timed:
-                prompt:      JOYSTICK TIMED INTERVAL
-                description: Enable timed intervals for joystick axes if drifts
-                choices:
-                    "On":                  "true"
-                    "Off":                 "false"
-            controller1_dosbox_pure:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select Keyboard, Joysticks or Gravis GamePad mode
-                choices:
-                    "Gravis GamePad (D-pad, 4 Buttons)":                    1
-                    "Generic Keyboard Binding":                             257
-                    "Keyboard + Mouse (Left Analog)":                       513
-                    "Keyboard + Mouse (Right Analog)":                      769
-                    "First Joystick (2 Axes, 2 Buttons)":                   1281
-                    # "Second Joystick (2 Axes, 2 Buttons)":                  1537
-                    "ThrustMaster Flight Stick (3 Axes, 4 Buttons, 1 Hat)": 1793
-                    "Both DOS Joysticks (4 Axes, 4 Buttons)":               2049
-                    "Custom Keyboard Bindings (best for Batocera Pad2Key)": 3
-            controller2_dosbox_pure:
-                prompt:      CONTROLLER 2 TYPE
-                description: Select Keyboard, Joysticks or Gravis GamePad mode
-                choices:
-                    "Gravis GamePad (D-pad, 4 Buttons)":                    1
-                    "Generic Keyboard Binding":                             257
-                    "Keyboard + Mouse (Left Analog)":                       513
-                    "Keyboard + Mouse (Right Analog)":                      769
-                    # "First Joystick (2 Axes, 2 Buttons)":                   1281
-                    "Second Joystick (2 Axes, 2 Buttons)":                  1537
-                    "ThrustMaster Flight Stick (3 Axes, 4 Buttons, 1 Hat)": 1793
-                    "Both DOS Joysticks (4 Axes, 4 Buttons)":               2049
-                    "Custom Keyboard Bindings (best for Batocera Pad2Key)": 3
     duckstation:
-      features: [autosave, latency_reduction, cheevos]
+      features: [                 autosave, latency_reduction, cheevos]
       cfeatures:
             duckstation_PatchFastBoot:
                 prompt:      SHOW BIOS BOOTLOGO
@@ -432,7 +241,7 @@ libretro:
                     "9x":         9
             duckstation_antialiasing:
                 prompt:      ANTI-ALIASING (MSAA/SSAA)
-                description: Smooth out jagged edges on 3D objetcs polygons
+                description: Smooth out jagged edges on 3D objetcs polygons 
                 choices:
                     "Off":        1
                     "2x msaa":    2
@@ -488,6 +297,7 @@ libretro:
                     "NeGcon":                        NeGcon
     easyrpg:
       features: []
+
     fbneo:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
       cfeatures:
@@ -601,30 +411,9 @@ libretro:
                     "disabled":             disabled
                     "2x-Postrender":        2x-Postrender
                     "2x-VBlank":            2x-VBlank
-            controller1_nes:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select NES Gamepad or Gun (must use a mouse)
-                choices:
-                    "Autodetect":           1
-                    "NES Gamepad":          513
-                    "NES Zapper":           258
-            controller2_nes:
-                prompt:      CONTROLLER 2 TYPE
-                description: Select NES Gamepad, Paddle or Gun (must use a mouse)
-                choices:
-                    "Autodetect":           1
-                    "NES Gamepad":          513
-                    "NES Zapper":           258
-                    "Arkanoid paddle":      514
     flycast:
-      features: [autosave]
+      features: [                 autosave]
       cfeatures:
-            reicast_synchronous_rendering:
-                prompt:      SYNCHRONOUS RENDERING
-                description: Wait for the GPU to render frames instead of skipping
-                choices:
-                    "Off": disabled 
-                    "On": enabled
             reicast_internal_resolution:
                 prompt:      VIDEO RESOLUTION
                 description: Improve the fidelity of 3D models (unaffect 2D)
@@ -710,38 +499,6 @@ libretro:
                 choices:
                     "Off": disabled
                     "On":  enabled
-            controller1_dc:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select Gamepad, Keyboard, Mouse or Light Gun
-                choices:
-                    "Gamepad":   1
-                    "Keyboard":  3
-                    "Mouse":     2
-                    "Light Gun": 4
-            controller2_dc:
-                prompt:      CONTROLLER 2 TYPE
-                description: Select Gamepad, Keyboard, Mouse or Light Gun
-                choices:
-                    "Gamepad":   1
-                    "Keyboard":  3
-                    "Mouse":     2
-                    "Light Gun": 4
-            controller3_dc:
-                prompt:      CONTROLLER 3 TYPE
-                description: Select Gamepad, Keyboard, Mouse or Light Gun
-                choices:
-                    "Gamepad":   1
-                    "Keyboard":  3
-                    "Mouse":     2
-                    "Light Gun": 4
-            controller4_dc:
-                prompt:      CONTROLLER 4 TYPE
-                description: Select Gamepad, Keyboard, Mouse or Light Gun
-                choices:
-                    "Gamepad":   1
-                    "Keyboard":  3
-                    "Mouse":     2
-                    "Light Gun": 4
       systems:
             atomiswave:
                 cfeatures:
@@ -760,11 +517,11 @@ libretro:
                             "Horizontal": horizontal
                             "Vertical":   vertical
     freeintv:
-      features: [latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
     freechaf:
-      features: [rewind]
+      features: [ rewind ]
     fuse:
-      features: [autosave, latency_reduction, padtokeyboard]
+      features: [                 autosave, latency_reduction, padtokeyboard]
       cfeatures:
             fuse_hide_border:
                 prompt:      ZOOM (HIDES BORDER)
@@ -773,7 +530,7 @@ libretro:
                     "Off":  disabled
                     "On":   enabled
     gambatte:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, colorization, cheevos]
       cfeatures:
             gb_bootloader:
                 prompt:      SHOW BIOS BOOTLOGO
@@ -781,7 +538,7 @@ libretro:
                 choices:
                     "Off":                     disabled
                     "On":                      enabled
-            gb_mix_frames:
+            mix_frames:
                 prompt:      GHOSTING EFFECT
                 description: Simulation of LCD ghosting effects
                 choices:
@@ -790,148 +547,6 @@ libretro:
                     "Simple (Fast)":           mix_fast
                     "LCD Ghosting (Accurate)": lcd_ghosting
                     "LCD Ghosting (Fast)":     lcd_ghosting_fast
-      systems:
-            gbc:
-                cfeatures:
-                    gbc_color_correction:
-                        prompt:      COLOR CORRECTION
-                        description: Adjusts output colors to feel real hardware
-                        choices:
-                            "Off":             disabled
-                            "On":              always
-            gb:
-                cfeatures:
-                    gb_colorization:
-                        prompt:      COLORISATION
-                        description: Set Game Boy palettes to use
-                        choices:
-                            "Off":                              none
-                            "GB - DMG":                         GB - DMG
-                            "GB - Light":                       GB - Light
-                            "GB - Pocket":                      GB - Pocket
-                            "GBC - Blue":                       GBC - Blue
-                            "GBC - Brown":                      GBC - Brown
-                            "GBC - Dark Blue":                  GBC - Dark Blue
-                            "GBC - Dark Brown":                 GBC - Dark Brown
-                            "GBC - Dark Green":                 GBC - Dark Green
-                            "GBC - Grayscale":                  GBC - Grayscale
-                            "GBC - Green":                      GBC - Green
-                            "GBC - Inverted":                   GBC - Inverted
-                            "GBC - Orange":                     GBC - Orange
-                            "GBC - Pastel Mix":                 GBC - Pastel Mix
-                            "GBC - Red":                        GBC - Red
-                            "GBC - Yellow":                     GBC - Yellow
-                            "SGB - 1A":                         SGB - 1A
-                            "SGB - 1B":                         SGB - 1B
-                            "SGB - 1C":                         SGB - 1C
-                            "SGB - 1D":                         SGB - 1D
-                            "SGB - 1E":                         SGB - 1E
-                            "SGB - 1F":                         SGB - 1F
-                            "SGB - 1G":                         SGB - 1G
-                            "SGB - 1H":                         SGB - 1H
-                            "SGB - 2A":                         SGB - 2A
-                            "SGB - 2B":                         SGB - 2B
-                            "SGB - 2C":                         SGB - 2C
-                            "SGB - 2D":                         SGB - 2D
-                            "SGB - 2E":                         SGB - 2E
-                            "SGB - 2F":                         SGB - 2F
-                            "SGB - 2G":                         SGB - 2G
-                            "SGB - 2H":                         SGB - 2H
-                            "SGB - 3A":                         SGB - 3A
-                            "SGB - 3B":                         SGB - 3B
-                            "SGB - 3C":                         SGB - 3C
-                            "SGB - 3D":                         SGB - 3D
-                            "SGB - 3E":                         SGB - 3E
-                            "SGB - 3F":                         SGB - 3F
-                            "SGB - 3G":                         SGB - 3G
-                            "SGB - 3H":                         SGB - 3H
-                            "SGB - 4A":                         SGB - 4A
-                            "SGB - 4B":                         SGB - 4B
-                            "SGB - 4C":                         SGB - 4C
-                            "SGB - 4D":                         SGB - 4D
-                            "SGB - 4E":                         SGB - 4E
-                            "SGB - 4F":                         SGB - 4F
-                            "SGB - 4G":                         SGB - 4G
-                            "SGB - 4H":                         SGB - 4H
-                            "Special 1":                        Special 1
-                            "Special 2":                        Special 2
-                            "Special 3":                        Special 3
-                            "TWB01 - 756 Production":           TWB01 - 756 Production
-                            "TWB02 - AKB48 Pink":               TWB02 - AKB48 Pink
-                            "TWB03 - Angry Volcano":            TWB03 - Angry Volcano
-                            "TWB04 - Anime Expo":               TWB04 - Anime Expo
-                            "TWB05 - Aqours Blue":              TWB05 - Aqours Blue
-                            "TWB06 - Aquatic Iro":              TWB06 - Aquatic Iro
-                            "TWB07 - Bandai Namco":             TWB07 - Bandai Namco
-                            "TWB08 - Blossom Pink":             TWB08 - Blossom Pink
-                            "TWB09 - Bubbles Blue":             TWB09 - Bubbles Blue
-                            "TWB10 - Builder Yellow":           TWB10 - Builder Yellow
-                            "TWB11 - Buttercup Green":          TWB11 - Buttercup Green
-                            "TWB12 - Camouflage":               TWB12 - Camouflage
-                            "TWB13 - Cardcaptor Pink":          TWB13 - Cardcaptor Pink
-                            "TWB14 - Christmas":                TWB14 - Christmas
-                            "TWB15 - Crunchyroll Orange":       TWB15 - Crunchyroll Orange
-                            "TWB16 - Digivice":                 TWB16 - Digivice
-                            "TWB17 - Do The Dew":               TWB17 - Do The Dew
-                            "TWB18 - Eevee Brown":              TWB18 - Eevee Brown
-                            "TWB19 - Fruity Orange":            TWB19 - Fruity Orange
-                            "TWB20 - Game.com":                 TWB20 - Game.com
-                            "TWB21 - Game Grump Orange":        TWB21 - Game Grump Orange
-                            "TWB22 - GameKing":                 TWB22 - GameKing
-                            "TWB23 - Game Master":              TWB23 - Game Master
-                            "TWB24 - Ghostly Aoi":              TWB24 - Ghostly Aoi
-                            "TWB25 - Golden Wild":              TWB25 - Golden Wild
-                            "TWB26 - Green Banana":             TWB26 - Green Banana
-                            "TWB27 - Greenscale":               TWB27 - Greenscale
-                            "TWB28 - Halloween":                TWB28 - Halloween
-                            "TWB29 - Hero Yellow":              TWB29 - Hero Yellow
-                            "TWB30 - Hokage Orange":            TWB30 - Hokage Orange
-                            "TWB31 - Labo Fawn":                TWB31 - Labo Fawn
-                            "TWB32 - Legendary Super Saiyan":   TWB32 - Legendary Super Saiyan
-                            "TWB33 - Lemon Lime Green":         TWB33 - Lemon Lime Green
-                            "TWB34 - Lime Midori":              TWB34 - Lime Midori
-                            "TWB35 - Mania Plus Green":         TWB35 - Mania Plus Green
-                            "TWB36 - Microvision":              TWB36 - Microvision
-                            "TWB37 - Million Live Gold":        TWB37 - Million Live Gold
-                            "TWB38 - Miraitowa Blue":           TWB38 - Miraitowa Blue
-                            "TWB39 - NASCAR":                   TWB39 - NASCAR
-                            "TWB40 - Neo Geo Pocket":           TWB40 - Neo Geo Pocket
-                            "TWB41 - Neon Blue":                TWB41 - Neon Blue
-                            "TWB42 - Neon Green":               TWB42 - Neon Green
-                            "TWB43 - Neon Pink":                TWB43 - Neon Pink
-                            "TWB44 - Neon Red":                 TWB44 - Neon Red
-                            "TWB45 - Neon Yellow":              TWB45 - Neon Yellow
-                            "TWB46 - Nick Orange":              TWB46 - Nick Orange
-                            "TWB47 - Nijigasaki Orange":        TWB47 - Nijigasaki Orange
-                            "TWB48 - Odyssey Gold":             TWB48 - Odyssey Gold
-                            "TWB49 - Patrick Star Pink":        TWB49 - Patrick Star Pink
-                            "TWB50 - Pikachu Yellow":           TWB50 - Pikachu Yellow
-                            "TWB51 - Pocket Tales":             TWB51 - Pocket Tales
-                            "TWB52 - Pokemon mini":             TWB52 - Pokemon mini
-                            "TWB53 - Pretty Guardian Gold":     TWB53 - Pretty Guardian Gold
-                            "TWB54 - S.E.E.S. Blue":            TWB54 - S.E.E.S. Blue
-                            "TWB55 - Saint Snow Red":           TWB55 - Saint Snow Red
-                            "TWB56 - Scooby-Doo Mystery":       TWB56 - Scooby-Doo Mystery
-                            "TWB57 - Shiny Sky Blue":           TWB57 - Shiny Sky Blue
-                            "TWB58 - Sidem Green":              TWB58 - Sidem Green
-                            "TWB59 - Slime Blue":               TWB59 - Slime Blue
-                            "TWB60 - Spongebob Yellow":         TWB60 - Spongebob Yellow
-                            "TWB61 - Stone Orange":             TWB61 - Stone Orange
-                            "TWB62 - Straw Hat Red":            TWB62 - Straw Hat Red
-                            "TWB63 - Superball Ivory":          TWB63 - Superball Ivory
-                            "TWB64 - Super Saiyan Blue":        TWB64 - Super Saiyan Blue
-                            "TWB65 - Super Saiyan Rose":        TWB65 - Super Saiyan Rose
-                            "TWB66 - Supervision":              TWB66 - Supervision
-                            "TWB67 - Survey Corps Brown":       TWB67 - Survey Corps Brown
-                            "TWB68 - Tea Midori":               TWB68 - Tea Midori
-                            "TWB69 - TI-83":                    TWB69 - TI-83
-                            "TWB70 - Tokyo Midtown":            TWB70 - Tokyo Midtown
-                            "TWB71 - Travel Wood":              TWB71 - Travel Wood
-                            "TWB72 - Virtual Boy":              TWB72 - Virtual Boy
-                            "TWB73 - VMU":                      TWB73 - VMU
-                            "TWB74 - Wisteria Murasaki":        TWB74 - Wisteria Murasaki
-                            "TWB75 - WonderSwan":               TWB75 - WonderSwan
-                            "TWB76 - Yellow Banana":            TWB76 - Yellow Banana
     genesisplusgx:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
       cfeatures:
@@ -974,7 +589,7 @@ libretro:
                             "Mouse":                         2
                     controller2_md:
                         prompt:      CONTROLLER 2 TYPE
-                        description: Select controller, Multitap, mouse or Gun
+                        description: Select 3 or 6 button controller, mouse or Multitap
                         choices:
                             #"None":                          0
                             "Joypad Auto":                   1
@@ -986,8 +601,6 @@ libretro:
                             "Joypad 6 Button + Teamplayer":  1793
                             #"XE-1AP":                        773
                             "Mouse":                         2
-                            "Menacer Light Gun":             516
-                            "Konami Justifiers":             772
             mastersystem:
                 cfeatures:
                     gpgx_blargg_filter_ms:
@@ -1002,9 +615,9 @@ libretro:
                         prompt:      FM CHIP (YM2413)
                         description: Enhanced sound output support for compatible games
                         choices:
-                            "Autodetect":  automatic
-                            "Off":         disabled
-                            "On (forced)": enabled
+                            "Automatic":  automatic
+                            "Off":        disabled
+                            "On":         enabled
                     gun_cursor_ms:
                         prompt:      SHOW LIGHTGUN CROSSHAIR
                         description: Shows crosshairs for Light Phaser device
@@ -1050,21 +663,21 @@ libretro:
                             "Off":       disabled
                             "On":        enabled
     gpsp:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, cheevos]
     gw:
-      features: [latency_reduction]
+      features: [                           latency_reduction]
     handy:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
     hatari:
-      features: [autosave, latency_reduction, padtokeyboard]
+      features: [                 autosave, latency_reduction, padtokeyboard]
     imame4all:
       features: [netplay, rewind, autosave, latency_reduction]
     kronos:
-      features: [autosave]
+      features: [                 autosave]
     lutro:
-      features: []
+      features: [ ]
     mame:
-      features: [netplay, autosave, latency_reduction]
+      features: [netplay,         autosave, latency_reduction]
       cfeatures:
             mame_cpu_overclock:
                 prompt:      CPU OVERCLOCK
@@ -1098,7 +711,7 @@ libretro:
                     "150":            150
             mame_altres:
                 prompt:      VIDEO RESOLUTION
-                description: Increase video to Higher Resolution
+                description: Increase video to Highter Resolution
                 choices:
                     "640x480":        640x480
                     "800x600":        800x600
@@ -1110,9 +723,9 @@ libretro:
                     "2560x1440":      2560x1440
                     "3840x2160":      3840x2160
     hbmame:
-      features: [netplay, autosave, latency_reduction]
+      features: [netplay,         autosave, latency_reduction]
     mame0139:
-      features: [netplay, autosave, latency_reduction]
+      features: [netplay,         autosave, latency_reduction]
       cfeatures:
             mame_current_frame_skip:
                 prompt:      FRAMSKIP
@@ -1135,7 +748,7 @@ libretro:
                     "R2 to button 2": R2 to button 2 mapping
             mame_current_turbo_delay:
                 prompt:      AUTOFIRE PULSE SPEED
-                description: Choose the fire speed for Autofire
+                description: Choose the fire speed for Autofire 
                 choices:
                     "slow":           slow
                     "medium":         medium
@@ -1187,7 +800,7 @@ libretro:
     mednafen_ngp:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
     mednafen_psx:
-      features: [autosave, latency_reduction, cheevos]
+      features: [                 autosave, latency_reduction, cheevos]
       cfeatures:
             beetle_psx_skip_bios:
                 prompt:      SHOW BIOS BOOTLOGO
@@ -1262,8 +875,8 @@ libretro:
                     "Full":                         full
                     "DMA Only (Slightly Faster)":   dma
             multitap_mednafen:
-                prompt:      MULTITAP
-                description: Allows 5 or 8 max players support in games
+                prompt:      ENABLE MULTITAP
+                description: Allowing 5-8 player support in games
                 choices:
                     "Off":              disabled
                     "Port 1":           port1
@@ -1307,7 +920,7 @@ libretro:
     mednafen_wswan:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
     mgba:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, cheevos]
       cfeatures:
             skip_bios_mgba:
                 prompt:      SHOW BIOS BOOTLOGO
@@ -1341,6 +954,7 @@ libretro:
                     color_correction:
                         prompt:      COLOR CORRECTION
                         description: Adjusts output colors to feel real hardware
+                        description: 
                         choices:
                             "Off": OFF
                             "On":  GBC
@@ -1394,7 +1008,7 @@ libretro:
                     "Off":    OFF
                     "On":     ON
     mupen64plus-next:
-      features: [autosave, cheevos]
+      features: [                 autosave, cheevos]
       cfeatures:
             mupen64plus-43screensize:
                 prompt:      VIDEO 4:3 RESOLUTION
@@ -1436,7 +1050,7 @@ libretro:
                     "3 point":    3point
             mupen64plus-MultiSampling:
                 prompt:      ANTI-ALIASING (MSAA)
-                description: Smooth out jagged edges on 3D objetcs polygons
+                description: Smooth out jagged edges on 3D objetcs polygons 
                 choices:
                     "Off":        0
                     "2x":         2
@@ -1472,36 +1086,8 @@ libretro:
                     "4xBRZ":      4xBRZ
                     "5xBRZ":      5xBRZ
                     "6xBRZ":      6xBRZ
-            mupen64plus-pak1:
-                prompt:      CONTROLLER PAK 1
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
-            mupen64plus-pak2:
-                prompt:      CONTROLLER PAK 2
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
-            mupen64plus-pak3:
-                prompt:      CONTROLLER PAK 3
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
-            mupen64plus-pak4:
-                prompt:      CONTROLLER PAK 4
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
     neocd:
-      features: [rewind, autosave]
+      features: [         rewind, autosave]
       cfeatures:
             neocd_region:
                 prompt:      CONSOLE REGION
@@ -1565,9 +1151,9 @@ libretro:
                 prompt:      4 PLAYER ADAPTER
                 description: Manually select a 4 Player Adapter for some games
                 choices:
-                    "Autodetect":           automatic
-                    "NTSC (NES)":           ntsc
-                    "Famicom (FDS)":        famicom
+                    "Autodetect":           auto
+                    "ntsc":                 ntsc
+                    "famicom":              famicom
     np2kai:
       features: [netplay, rewind, autosave, padtokeyboard]
       cfeatures:
@@ -1639,8 +1225,8 @@ libretro:
                 description: (Off) will show Black Scanline in older games (Graphically designed to use scanlines)
                 choices:
                     "Full 255 lines": Full 255 lines
-                    "Off":       OFF
-                    "On":        ON
+                    "Off":            OFF
+                    "On":             ON
             np2kai_realpal:
                 prompt:      REAL PALETTES
                 description: Some games only working correctly with this (Apros)
@@ -1698,9 +1284,9 @@ libretro:
                     "Manual keyboard":              Manual Keyboard
                     "Atari Joypad":                 Atari Joypad
     nxengine:
-      features: [latency_reduction]
+      features: [                           latency_reduction]
     o2em:
-      features: [rewind, autosave, latency_reduction]
+      features: [         rewind, autosave, latency_reduction]
     opera:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
       cfeatures:
@@ -1743,9 +1329,9 @@ libretro:
                     "Dinopark Tycoon":   timing_hack3
                     "Microcosm":         timing_hack5
     parallel_n64:
-      features: [autosave, cheevos]
+      features: [                 autosave, cheevos]
       cfeatures:
-            parallel-n64-screensize:
+            screensize:
                 prompt:      VIDEO RESOLUTION
                 description: Improve the fidelity of 3D models (unaffect 2D)
                 choices:
@@ -1759,13 +1345,7 @@ libretro:
                     "2240x1680": 2240x1680
                     "2880x2160": 2880x2160
                     "5760x4320": 5760x4320
-            parallel-n64-aspectratiohint:
-                prompt:      WIDESCREEN
-                description: Break aspect ratio and strech image
-                choices:
-                    "Off":   normal
-                    "On":    widescreen
-            parallel-n64-filtering:
+            filtering:
                 prompt:      TEXTURE FILTERING
                 description: Smooths out textures on 3D objetcs
                 choices:
@@ -1773,40 +1353,6 @@ libretro:
                     "N64 3-point": N64 3-point
                     "Bilinear":    bilinear
                     "Nearest":     nearest
-            parallel-n64-framerate:
-                prompt:      FRAMERATE
-                description: Fullspeed can break some games
-                choices:
-                    "fullspeed":   fullspeed
-                    "original":    original
-            parallel-n64-pak1:
-                prompt:      CONTROLLER PAK 1
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
-            parallel-n64-pak2:
-                prompt:      CONTROLLER PAK 2
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
-            parallel-n64-pak3:
-                prompt:      CONTROLLER PAK 3
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
-            parallel-n64-pak4:
-                prompt:      CONTROLLER PAK 4
-                description: Select player 1 Memory or Rumble pack
-                choices:
-                    "Off":         none
-                    "memory":      memory
-                    "rumble":      rumble
     pce:
       features: [netplay, rewind, autosave, latency_reduction]
       cfeatures:
@@ -1814,29 +1360,17 @@ libretro:
                 prompt:      REDUCE SPRITE FLICKERING
                 description: Remove 16-sprites-per-scanline hardware limit
                 choices:
-                    "Off":         disabled
-                    "On":          enabled
-            controller1_pce:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select PCE Joypad or Mouse
-                choices:
-                    "PCE Joypad": 1
-                    "PCE Mouse":  2
+                    "Off":        disabled
+                    "On":         enabled
     pce_fast:
-      features: [netplay, rewind, autosave, latency_reduction, cheevos]
+      features: [netplay, rewind, autosave, latency_reduction]
       cfeatures:
-            pce_nospritelimit:
+            sgx_nospritelimit:
                 prompt:      REDUCE SPRITE FLICKERING
                 description: Remove 16-sprites-per-scanline hardware limit
                 choices:
                     "Off":        disabled
                     "On":         enabled
-            controller1_pce:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select PCE Joypad or Mouse
-                choices:
-                    "PCE Joypad": 1
-                    "PCE Mouse":  2
     pcfx:
       features: [netplay, rewind, autosave, latency_reduction]
       cfeatures:
@@ -1847,7 +1381,7 @@ libretro:
                     "Off":        disabled
                     "On":         enabled
     pcsx_rearmed:
-      features: [autosave, latency_reduction, cheevos]
+      features: [                 autosave, latency_reduction, cheevos]
       cfeatures:
             show_bios_bootlogo:
                 prompt:      SHOW BIOS BOOTLOGO
@@ -1871,8 +1405,8 @@ libretro:
                     "On":               enabled
                     "On (Speed hack)":  enabled_with_speedhack
             multitap_pcsx:
-                prompt:      MULTITAP
-                description: Allows 5 or 8 max players support in games
+                prompt:      ENABLE MULTITAP
+                description: Allowing 5-8 player support in games
                 choices:
                     "Off":              disabled
                     "Port1":            port1
@@ -1937,7 +1471,7 @@ libretro:
     pocketsnes:
       features: [netplay, rewind, autosave, latency_reduction]
     pokemini:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, cheevos]
       cfeatures:
             pokemini_lcdfilter:
                 prompt:      LCD FILTER
@@ -1952,9 +1486,9 @@ libretro:
                     "Off":  3shades
                     "On":   analog
     ppsspp:
-      features: [rewind, autosave, latency_reduction]
+      features: [         rewind, autosave, latency_reduction]
     prboom:
-      features: [rewind, autosave, latency_reduction]
+      features: [         rewind, autosave, latency_reduction]
       cfeatures:
             prboom-resolution:
                 prompt:      VIDEO RESOLUTION
@@ -1969,99 +1503,37 @@ libretro:
                     "2240x1400":  2240x1400
                     "2560x1600":  2560x1600
     prosystem:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, cheevos]
     puae:
-      features: [rewind, autosave, padtokeyboard]
+      features: [         rewind, autosave, padtokeyboard]
       cfeatures:
-            puae_model:
-                prompt:      AMIGA MODEL
-                description: Force a specific model and prevent tags detection
-                choices:
-                    "Autodetect (by game name tag)":   automatic
-                    "A500 (512KB Chip + 512KB Slow)":  A500
-                    "A500+ (1MB Chip)":                A500PLUS
-                    "A600 (2MB Chip + 8MB Fast)":      A600
-                    "A1200 (2MB Chip + 8MB Fast)":     A1200
-                    "A4000/040 (2MB Chip + 8MB Fast)": A4040
-                    "CDTV (1MB Chip)":                 CDTV
-                    "CD32 Default (2MB Chip)":         CD32
-                    "CD32 (2MB Chip + 8MB Fast)":      CD32FR
-            cpu_compatibility:
-                prompt:      CPU COMPATIBILITY
-                description: Help games which are too quick or that have bugs
-                choices:
-                    "Normal":          normal
-                    "More compatible": compatible
-                    "Cycle-exact":     exact
-            cpu_multiplier:
-                prompt:      CPU MULTIPLIER (OVERCLOCK)
-                description: Works with 'Cycle-exact' mode and for a few games
-                choices:
-                    "Default by model":        0
-                    " 3.54 MHz":               1
-                    " 7.09 MHz (A500 speed)":  2
-                    "14.18 MHz (A1200 speed)": 4
-                    "28.37 MHz":               8
-                    "35.46 MHz":               10
-                    "42.56 MHz":               12
-                    "56.75 MHz":               16
-            cpu_throttle:
-                prompt:      CPU SPEED (OVERCLOCK)
-                description: Ignored with 'Cycle-exact'
-                choices:
-                    "-90%":    -900.0
-                    "-80%":    -800.0
-                    "-70%":    -700.0
-                    "-60%":    -600.0
-                    "-50%":    -500.0
-                    "-40%":    -400.0
-                    "-30%":    -300.0
-                    "-20%":    -200.0
-                    "-10%":    -100.0
-                    "Default": 0.0
-                    "+100%":   1000.0
-                    "+200%":   2000.0
-                    "+300%":   3000.0
-                    "+400%":   4000.0
-                    "+500%":   5000.0
-                    "+600%":   6000.0
-                    "+700%":   7000.0
-                    "+800%":   8000.0
-                    "+900%":   9000.0
-                    "+1000%":  10000.0
-            video_standard:
-                prompt:      VIDEO STANDARD
-                description: Switch frequency and resolution by region
-                choices:
-                    "PAL 50Hz - 288/576px":  PAL
-                    "NTSC 60Hz - 240/480px": NTSC
             video_resolution:
                 prompt:      VIDEO RESOLUTION
                 description: Increase video to Hi Resolution
                 choices:
-                    "Low 360p":         lores
-                    "High 720p":        hires
-                    "Super-high 1440p": superhires
+                    "360p":       lores
+                    "720p":       hires
+                    "1440p":      superhires
+            video_standard:
+                prompt:      VIDEO STANDARD
+                description: Switch frequency and resolution by region
+                choices:
+                    "PAL 50Hz - 288/576px":        PAL
+                    "NTSC 60Hz - 240/480px":       NTSC
             zoom_mode:
                 prompt:      ZOOM MODE
                 description: Crops the borders to fit various host screens
                 choices:
-                    "Off":            none
-                    "Autofit screen": automatic
-                    "minimum":        minimum
-                    "smaller":        smaller
-                    "small":          small
-                    "medium":         medium
-                    "large":          large
-                    "larger":         larger
-                    "maximum":        maximum
-            gfx_framerate:
-                prompt:      FRAMESKIP
-                description: Skip frames to improve performance (Smoothless)
+                    "Off":        none
+                    "medium":     medium
+                    "large":      large
+                    "larger":     larger
+            keyrah_mapping:
+                prompt:      2P GAMEPAD MAPPING (KEYRAH)
+                description: Keypad to joyport mappings for 2 players
                 choices:
                     "Off":        disabled
-                    "1":          1
-                    "2":          2
+                    "On":         enabled
             mouse_speed:
                 prompt:      MOUSE SPEED
                 description: Affects mouse speed globally.
@@ -2073,108 +1545,33 @@ libretro:
                     "150%":       150
                     "170%":       170
                     "200%":       200
-      systems:
-            amiga500:
-                cfeatures:
-                    puae_floppy_speed:
-                        prompt:      FLOPPY TURBO SPEED
-                        description: Remove loading but can add possible glitches/crash
-                        choices:
-                            "Off":    100
-                            "On":     0
-                    keyrah_mapping:
-                        prompt:      2P GAMEPAD MAPPING (KEYRAH)
-                        description: Keypad to joyport mappings for 2 players
-                        choices:
-                            "Off":    disabled
-                            "On":     enabled
-                    whdload:
-                        prompt:      WHDLOAD LAUNCHER
-                        description: Enable launching pre-installed WHDLoad installs
-                        choices:
-                            "Off":    disabled
-                            "On":     config
-                    pad_options:
-                        prompt:      JUMP ON B
-                        description: Makes second fire button press up
-                        choices:
-                            "Off":    disabled
-                            "On":     jump
-                    disable_joystick:
-                        prompt:      DISABLE EMULATOR JOYSTICK
-                        description: Passes all physical keyboard events for Pad2Key
-                        choices:
-                            "Off":    disabled
-                            "On":     enabled
-            amiga1200:
-                cfeatures:
-                    puae_floppy_speed:
-                        prompt:      FLOPPY TURBO SPEED
-                        description: Remove loading but can add possible glitches/crash
-                        choices:
-                            "Off":    100
-                            "On":     0
-                    keyrah_mapping:
-                        prompt:      2P GAMEPAD MAPPING (KEYRAH)
-                        description: Keypad to joyport mappings for 2 players
-                        choices:
-                            "Off":    disabled
-                            "On":     enabled
-                    whdload:
-                        prompt:      WHDLOAD LAUNCHER
-                        description: Enable launching pre-installed WHDLoad installs
-                        choices:
-                            "Off":    disabled
-                            "On":     config
-                    pad_options:
-                        prompt:      JUMP ON B
-                        description: Makes second fire button press up
-                        choices:
-                            "Off":    disabled
-                            "On":     jump
-                    disable_joystick:
-                        prompt:      DISABLE EMULATOR JOYSTICK
-                        description: Passes all physical keyboard events for Pad2Key
-                        choices:
-                            "Off":    disabled
-                            "On":     enabled
-            amigacd32:
-                cfeatures:
-                    puae_cd_startup_delayed_insert:
-                        prompt:      BOOT ANIMATION FIRST
-                        description: Inserts CD during boot animation prevent loading fail
-                        choices:
-                            "Off":    disabled
-                            "On":     enabled
-                    puae_cd_speed:
-                        prompt:      CD TURBO SPEED
-                        description: Remove loading but can add possible glitches/crash
-                        choices:
-                            "Off":    100
-                            "On":     0
-                    puae_cd32pad_options:
-                        prompt:      JUMP ON A
-                        description: Makes Blue button press Up
-                        choices:
-                            "Off":    disabled
-                            "On":     jump
-            amigacdtv:
-                cfeatures:
-                    puae_cd_startup_delayed_insert:
-                        prompt:      BOOT ANIMATION FIRST
-                        description: Inserts CD during boot animation prevent loading fail
-                        choices:
-                            "Off":    disabled
-                            "On":     enabled
-                    puae_cd_speed:
-                        prompt:      CD TURBO SPEED
-                        description: Remove loading but can add possible glitches/crash
-                        choices:
-                            "Off":    100
-                            "On":     0
-
+            whdload:
+                prompt:      WHDLOAD LAUNCHER
+                description: Enable launching pre-installed WHDLoad installs
+                choices:
+                    "Off":        disabled
+                    "On":         config
+            pad_options:
+                prompt:      JUMP ON B
+                description: Makes second fire button press up
+                choices:
+                    "Off":        disabled
+                    "On":         jump
+            disable_joystick:
+                prompt:      DISABLE EMULATOR JOYSTICK
+                description: Passes all physical keyboard events for Pad2Key
+                choices:
+                    "Off":        disabled
+                    "On":         enabled
+            gfx_framerate:
+                prompt:      FRAMESKIP
+                description: Skip frames to improve performance (Smoothless)
+                choices:
+                    "Off":        disabled
+                    "1":          1
+                    "2":          2
     px68k:
-      features: [latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
       cfeatures:
             px68k_cpuspeed:
                 prompt:      CPU SPEED (OVERCLOCK)
@@ -2255,39 +1652,9 @@ libretro:
                     "Off":                  disabled
                     "On":                   enabled
     retro8:
-      features: [latency_reduction]
+      features: [                           latency_reduction]
     scummvm:
-      features: [latency_reduction, padtokeyboard]
-      cfeatures:
-            scummvm_analog_deadzone:
-                prompt:      ANALOG DEADZONE
-                description: Used to eliminate cursor drift/unwanted input
-                choices:
-                    "15%":        15
-                    "20%":        20
-                    "25%":        25
-                    "30%":        30
-                    "0%":         0
-                    "5%":         5
-                    "10%":        10
-            scummvm_gamepad_cursor_speed:
-                prompt:      GAMEPAD CURSOR SPEED
-                description: For high definition 640x480 games set the Speed to 2.0
-                choices:
-                    "1.0":        1.0
-                    "1.5":        1.5
-                    "2.0":        2.0
-                    "2.5":        2.5
-                    "3.0":        3.0
-                    "0.25":       0.25
-                    "0.5":        0.5
-                    "0.75":       0.75
-            scummvm_speed_hack:
-                prompt:      SPEED HACK (SAFE)
-                description: Reduces the CPU requirements for low power hardware
-                choices:
-                    "Off":        disabled
-                    "On":         enabled
+      features: [                           latency_reduction, padtokeyboard]
     snes9x:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
       cfeatures:
@@ -2330,28 +1697,6 @@ libretro:
                     "Off":        disabled
                     "Merge":      merge
                     "Blur":       blur
-            controller1_snes9x:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select SNES Gamepad or Mouse
-                choices:
-                    "SNES Gamepad":     1
-                    "SNES Mouse":       2
-            controller2_snes9x:
-                prompt:      CONTROLLER 2 TYPE
-                description: Select SNES Gamepad, Mouse, Multitap or Guns
-                choices:
-                    "SNES Gamepad":     1
-                    "SNES Mouse":       2
-                    "SNES Multitap":    257
-                    "Super Scope":      260
-                    "Konami Justifier": 516
-                    "M.A.C.S. Rifle":   1028
-            controller3_snes9x:
-                prompt:      CONTROLLER 3 TYPE
-                description: Select SNES Gamepad or Justifier for Player 2
-                choices:
-                    "SNES Gamepad":          1
-                    "Konami Justifier (P2)": 772
     snes9x_next:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
       cfeatures:
@@ -2385,22 +1730,6 @@ libretro:
                     "20 MHz":               20 MHz
                     "30 MHz":               30 MHz
                     "40 MHz":               40 MHz
-            controller1_snes9x_next:
-                prompt:      CONTROLLER 1 TYPE
-                description: Select SNES Gamepad or Mouse
-                choices:
-                    "SNES Gamepad":           1
-                    "SNES Mouse":             2
-            controller2_snes9x_next:
-                prompt:      CONTROLLER 2 TYPE
-                description: Select SNES Gamepad, Mouse, Multitap or Guns
-                choices:
-                    "SNES Gamepad":           1
-                    "SNES Mouse":             2
-                    "SNES Multitap":          257
-                    "Super Scope":            260
-                    "Konami Justifier":       516
-                    "Dual Konami Justifiers": 772
     stella:
       features: [netplay, rewind, autosave, latency_reduction, cheevos]
     tgbdual:
@@ -2408,9 +1737,10 @@ libretro:
     theodore:
       features: [netplay, rewind, autosave, latency_reduction, padtokeyboard]
     tic80:
-      features: [latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
     tyrquake:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
+      features: [                           latency_reduction, padtokeyboard]
+      features: [         rewind, autosave]
       cfeatures:
             tyrquake_resolution:
                 prompt:      VIDEO RESOLUTION
@@ -2426,7 +1756,7 @@ libretro:
                 prompt:      FRAMERATE
                 description: Modify framerate
                 choices:
-                    "Automatic":  automatic
+                    "Automatic":  Automatic
                     "10fps":      10fps
                     "15fps":      15fps
                     "20fps":      20fps
@@ -2444,12 +1774,12 @@ libretro:
                     "160fps":     160fps
             tyrquake_rumble:
                 prompt:      RUMBLE
-                description: Enables joypad rumble (vibration)
+                description: Enables joypad rumble
                 choices:
                     "Off":        disabled
                     "On":         enabled
     vb:
-      features: [netplay, rewind, autosave, latency_reduction, cheevos]
+      features: [netplay, rewind, autosave, latency_reduction]
       cfeatures:
             2d_color_mode:
                 prompt:      COLOR PALETTE (2D)
@@ -2474,7 +1804,7 @@ libretro:
                     "green/magenta":       green & magenta
                     "yellow/blue":         yellow & blue
     vba-m:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, cheevos]
       systems:
             gb:
                 cfeatures:
@@ -2589,7 +1919,7 @@ libretro:
                             "115": 115
                             "120": 120
     vecx:
-      features: [rewind, autosave, latency_reduction, cheevos]
+      features: [         rewind, autosave, latency_reduction, cheevos]
       cfeatures:
             res_multi:
                 prompt:      RESOLUTION MULTIPLIER
@@ -2600,108 +1930,8 @@ libretro:
                     "3":    3
                     "4":    4
     vice_x64:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
+      features: [         rewind, autosave, latency_reduction, padtokeyboard]
       cfeatures:
-            c64_model:
-                prompt:      MODEL TYPE
-                description: Automatic switches region per file path tags
-                choices:
-                    "C64 PAL Automatic":        C64 PAL auto
-                    "C64 NTSC Automatic":       C64 NTSC auto
-                    #"C64C PAL Automatic":       C64C PAL auto
-                    #"C64C NTSC Automatic:       C64C NTSC auto
-                    "C64 PAL":                  C64 PAL
-                    "C64 NTSC":                 C64 NTSC
-                    #"C64C PAL":                 C64C PAL
-                    #"C64C NTSC":                C64C NTSC
-                    #"SX-64 PAL":                C64SX PAL
-                    #"SX-64 NTSC":               C64SX NTSC
-                    #"Educator 64 PAL":          PET64 PAL
-                    #"Educator 64 NTSC":         PET64 NTSC
-                    "C64 Games System PAL":     C64 GS PAL
-                    "C64 Japanese NTSC":        C64 JAP NTSC
-            external_palette:
-                prompt:      EXTERNAL PALETTE
-                description: Choose the most accurate colors
-                choices:
-                    "default":                  default
-                    "colodore":                 colodore
-                    "pepto-pal":                pepto-pal
-                    "pepto-ntsc":               pepto-ntsc
-                    "pepto-ntsc-sony":          pepto-ntsc-sony
-                    "cjam":                     cjam
-                    "c64hq":                    c64hq
-                    "c64s":                     c64s
-                    "ccs64":                    ccs64
-                    "community-colors":         community-colors
-                    "deekay":                   deekay
-                    "frodo":                    frodo
-                    "godot":                    godot
-                    "pc64":                     pc64
-                    "ptoing":                   ptoing
-                    "rgb":                      rgb
-                    "vice":                     vice
-            aspect_ratio:
-                prompt:      ASPECT RATIO
-                description: Switch frequency and resolution by region
-                choices:
-                    "PAL 50Hz - 312/576px":     pal
-                    "NTSC 60Hz - 262/492px":    ntsc
-            zoom_mode_c64:
-                prompt:      ZOOM MODE
-                description: Crops the borders to fit various host screens
-                choices:
-                    "Off":                      none
-                    "small":                    small
-                    "medium":                   medium
-                    "maximum":                  maximum
-            vice_joyport:
-                prompt:      CONTROLLER PORT
-                description: Most games use port 2, some use port 1
-                choices:
-                    "Port 1":                   1
-                    "Port 2":                   2
-            vice_joyport_type:
-                prompt:      CONTROLLER TYPE
-                description: Choose what type of controller to use
-                choices:
-                    "Joystick":                 1
-                    "Paddles":                  2
-                    "Mouse (1351)":             3
-                    #"Mouse (NEOS)":             4
-                    #"Mouse (Amiga)":            5
-                    "Trackball (Atari CX-22)":  6
-                    #"Mouse (Atari ST)":         7
-                    #"Mouse (SmartMouse)":       8
-                    #"Mouse (Micromys)":         9
-                    "Koalapad":                 10
-            keyboard_pass_through:
-                prompt:      KEYBOARD PASS-THROUGH
-                description: Passes all physical keyboard events for Pad2Key
-                choices:
-                    "Off":                      disabled
-                    "On":                       enabled
-    vice_x64sc:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
-      cfeatures:
-            c64_model:
-                prompt:      COMPUTER MODEL
-                description: Automatic switches region per file path tags
-                choices:
-                    "C64 PAL Automatic":        C64 PAL auto
-                    "C64 NTSC Automatic":       C64 NTSC auto
-                    #"C64C PAL Automatic":       C64C PAL auto
-                    #"C64C NTSC Automatic:       C64C NTSC auto
-                    "C64 PAL":                  C64 PAL
-                    "C64 NTSC":                 C64 NTSC
-                    #"C64C PAL":                 C64C PAL
-                    #"C64C NTSC":                C64C NTSC
-                    #"SX-64 PAL":                C64SX PAL
-                    #"SX-64 NTSC":               C64SX NTSC
-                    #"Educator 64 PAL":          PET64 PAL
-                    #"Educator 64 NTSC":         PET64 NTSC
-                    "C64 Games System PAL":     C64 GS PAL
-                    "C64 Japanese NTSC":        C64 JAP NTSC
             external_palette:
                 prompt:      EXTERNAL PALETTE
                 description: Choose the most accurate colors
@@ -2749,16 +1979,18 @@ libretro:
                 choices:
                     "Off":              disabled
                     "On":               enabled
+    vice_x64sc:
+      features: [         rewind, autosave, latency_reduction, padtokeyboard]
     vice_xplus4:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
+      features: [         rewind, autosave, latency_reduction, padtokeyboard]
     vice_x128:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
+      features: [         rewind, autosave, latency_reduction, padtokeyboard]
     vice_xvic:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
+      features: [         rewind, autosave, latency_reduction, padtokeyboard]
     vice_xpet:
-      features: [rewind, autosave, latency_reduction, padtokeyboard]
+      features: [         rewind, autosave, latency_reduction, padtokeyboard]
     virtualjaguar:
-      features: [autosave, latency_reduction, padtokeyboard, cheevos]
+      features: [                 autosave, latency_reduction, padtokeyboard, cheevos]
       cfeatures:
             usefastblitter:
                 prompt:      FAST BLITTER (LESS COMPATIBLE)
@@ -2779,11 +2011,11 @@ libretro:
                     "Off":      disabled
                     "On":       enabled
     x1:
-      features: [rewind, autosave, padtokeyboard]
+      features: [         rewind, autosave, padtokeyboard]
     xash3d_fwgs:
-      features: []
+      features: [ ]
     yabasanshiro:
-      features: [autosave]
+      features: [                 autosave]
       cfeatures:
             resolution_mode:
                 prompt:      VIDEO RESOLUTION
@@ -2796,15 +2028,13 @@ libretro:
                     "1080p":    1080p
                     "4k":       4k
             multitap_yabasanshiro:
-                prompt:      MULTITAP
+                prompt:      ENABLE MULTITAP
                 description: Allowing 7-12 player support in games
                 choices:
-                    "Off":      disabled
-                    "Port1":    port1
-                    "Port2":    port2
-                    "Port1+2":  port12
-    watara:
-      features: [cheevos]
+                    "Off":              disabled
+                    "Port1":            port1
+                    "Port2":            port2
+                    "Port1+2":          port12
 
 # Standalones
 
@@ -2820,8 +2050,8 @@ cannonball:
             choices:
                 "Off": 0
                 "On":  1
-
 cemu:
+  features: [emulated_wiimotes]
   cfeatures:
         gfxbackend:
             prompt:      GRAPHICS BACKEND
@@ -2829,82 +2059,18 @@ cemu:
             choices:
                 "OpenGL": OpenGL
                 "Vulkan": Vulkan
-        async:
-            prompt:      ASYNC SHADER
-            description: Speedup shader compilation (Vulkan only)
-            choices:
-                "Off":    0
-                "On":     1
-        emulatedwiimotes:
-            prompt:      EMULATE WIIMOTE
-            description: Use gamepad like Sideway Wiimote, Nunchuk on RStick
-            choices:
-                "Off":    0
-                "On":     1
 
 citra:
-  features: [ratio]
-  cfeatures:
-        citra_screen_layout:
-            prompt:      SCREEN LAYOUT
-            description: Allows you to arrange the DS screens
-            choices:
-                "top/bottom":            4-false
-                "bottom/top":            4-true
-                "left/right":            3-false
-                "right/left":            3-true
-                "top only":              1-false
-                "bottom only":           1-true
-                "hybrid top ratio 4":    2-false
-                "hybrid bottom ratio 4": 2-true
-        citra_resolution_factor:
-            prompt:      VIDEO RESOLUTION
-            description: Improve the fidelity of 3D models (unaffect 2D)
-            choices:
-                "Native (400x240)":      1
-                "2x (800x480)":          2
-                "3x (1200x720)":         3
-                "4x (1600x960)":         4
-                "5x (2000x1200)":        5
-                "6x (2400x1440)":        6
-                "7x (2800x1680)":        7
-                "8x (3200x1920)":        8
-                "9x (3600x2160)":        9
-                "10x (4000x2400)":       10
-        citra_use_frame_limit:
-            prompt:      FRAME LIMIT
-            description: Disable will help some games, others will run too fast
-            choices:
-                "Off":                   0
-                "On":                    1
-        citra_use_disk_shader_cache:
-            prompt:      DISK SHADER CACHE
-            description: Reduce stutter that happens when building shader
-            choices:
-                "Off":                   0
-                "On":                    1
-        citra_custom_textures:
-            prompt:      CUSTOM TEXTURES
-            description: Permit to use HD Texture Pack, preload use more RAM
-            choices:
-                "Off":                   0
-                "Normal":                1-normal
-                "Preload":               1-preload
-        citra_is_new_3ds:
-            prompt:      IS NEW 3DS
-            description: New 3DS has a faster processor, ZL/ZR and C-Stick
-            choices:
-                "Off":                   0
-                "On":                    1
+  features: [ratio, rewind, screen_layout]
 
 daphne:
   features: [ratio, padtokeyboard]
 
 dolphin:
-  features: [ratio]
+  features: [ratio, internal_resolution]
   cfeatures:
         gfxbackend:
-            archs_include: [x86, x86_64, rpi4, odroidgoa]
+            archs_include: [x86, x86_64, rpi4]
             prompt:      GRAPHICS BACKEND
             description: Choose your graphics rendering
             choices:
@@ -2916,24 +2082,6 @@ dolphin:
             choices:
                 "Off": 0
                 "On":  1
-        use_pad_profiles:
-            prompt:      USE PAD PROFILES
-            description: search custom configured joysticks profiles
-            choices:
-                "Off": 0
-                "On":  1
-        internal_resolution:
-            prompt:      VIDEO RESOLUTION
-            description: Improve the fidelity of 3D models (unaffect 2D)
-            choices:
-                "1x native (640x528)":  1
-                "2x 720p (1280x1056)":  2
-                "3x 1080p (1920x1584)": 3
-                "4x 1440p (2560x2112)": 4
-                "5x (3200x2640)":       5
-                "6x 4K (3840x3168)":    6
-                "7x (4480x3696)":       7
-                "8x 5K (5120x4224)":    8
         anisotropic_filtering:
             prompt:      ANISOTROPIC FILTERING
             description: Enhance the quality with on perspective textures
@@ -2989,7 +2137,7 @@ dolphin:
                 "On":  1
         enable_fastdisc:
             prompt:      FAST DISK SPEED
-            description: Speed up disc speed to remove any loading
+            description: Speed up disc speed to remoe any loading
             choices:
                 "Off": 0
                 "On":  1
@@ -3012,7 +2160,7 @@ dolphin:
                 "Off": 0
                 "On":  1
         rumble:
-            prompt:      RUMBLE
+            prompt:      ENABLE RUMBLE
             description: To use vibration on games with Rumble mode
             choices:
                 "Off": 0
@@ -3020,16 +2168,11 @@ dolphin:
 
   systems:
     wii:
+        features: [emulated_wiimotes]
         cfeatures:
-            emulatedwiimotes:
-                prompt:      EMULATE WIIMOTE
-                description: Use your gamepad like a vertical Wiimote in game
-                choices:
-                    "Off":                       0
-                    "On":                        1
             controller_mode:
-                prompt:      CUSTOMIZE WIIMOTE & GAMEPAD
-                description: Wiimote Sideway, L2 for Shake, Nunchuk on RStick
+                prompt:      GAMEPAD CONTROLLER MODE
+                description: Use gamepad with L2 for Shake and more on right stick
                 choices:
                     "Off":                       disabled
                     "Classic Controller":        cc
@@ -3046,208 +2189,14 @@ dosbox_staging:
 dosbox-x:
   features: [ratio, padtokeyboard]
 
-duckstation:
-  features: [videomode, ratio]
-  cfeatures:
-        duckstation_rewind:
-            prompt:      REWIND
-            description: Warning, this feature use a lot of RAM & VRAM
-            choices:
-                "Off":                                         "false"
-                "5  sec Accurate / 250 Mo RAM + 1200 Mo VRAM": 5
-                "10 sec Accurate / 500 Mo RAM + 2400 Mo VRAM": 10
-                "15 sec / Total 135 Mo RAM (Small boards)":    15
-                "30 sec / Total 270 Mo RAM (Middle boards)":   30
-                "60 sec / 300 Mo RAM + 240 Mo VRAM":           60
-                "90 sec / 450 Mo RAM + 360 Mo VRAM":           90
-                "120 sec / 600 Mo RAM + 480 Mo VRAM":          120
-        gfxbackend:
-            archs_include: [x86, x86_64, rpi4, odroidgoa]
-            prompt:      GRAPHICS BACKEND
-            description: Choose your graphics rendering
-            choices:
-                "OpenGL":                       OpenGL
-                "Vulkan":                       Vulkan
-        duckstation_threadedpresentation:
-            prompt:      VULKAN THREADED
-            description: Can mesurably improve performance if Vsync disabled
-            choices:
-                "Off":                          0
-                "On":                           1
-        duckstation_vsync:
-            prompt:      VSYNC
-            description: Fix the heavy screen tearing in games (heavy CPU)
-            choices:
-                "Off":                          0
-                "On":                           1
-        duckstation_frameskip:
-            prompt:      FRAME SKIP
-            description: Skip frames to improve performance (Smoothless)
-            choices:
-                "Off":                          0
-                "On":                           1
-        duckstation_PatchFastBoot:
-            prompt:      SHOW BIOS BOOTLOGO
-            description: Show BIOS animation when starting content
-            choices:
-                "Off":                          1
-                "On":                           0
-        duckstation_resolution_scale:
-            prompt:      VIDEO RESOLUTION
-            description: Improve the fidelity of 3D models (unaffect 2D)
-            choices:
-                "1x(native)":                   1
-                "2x":                           2
-                "3x/720p":                      3
-                "4x":                           4
-                "5x/1080p":                     5
-                "6x/1440p":                     6
-                "7x":                           7
-                "8x":                           8
-                "9x/4K":                        9
-                "10x":                          10
-                "11x":                          11
-                "12x":                          12
-                "13x":                          13
-                "14x":                          14
-                "15x":                          15
-                "16x":                          16
-        duckstation_antialiasing:
-            prompt:      ANTI-ALIASING (MSAA/SSAA)
-            description: Smooth out jagged edges on 3D objetcs polygons
-            choices:
-                "Off":                          1
-                "2x msaa":                      2
-                "4x msaa":                      4
-                "8x msaa":                      8
-                "16x msaa":                     16
-                "32x msaa":                     32
-                "2x ssaa":                      2-ssaa
-                "4x ssaa":                      4-ssaa
-                "8x ssaa":                      8-ssaa
-                "16x ssaa":                     16-ssaa
-                "32x ssaa":                     32-ssaa
-        duckstation_texture_filtering:
-            prompt:      TEXTURE FILTERING
-            description: Smooths out textures on 3D objetcs
-            choices:
-                "Nearest-Neighbor":             Nearest
-                "Bilinear":                     Bilinear
-                "Bilinear (no Edge Blending)":  BilinearBinAlpha
-                "JINC2":                        Jinc2
-                "JINC2 (no Edge Blending)":     Jinc2BinAlpha
-                "xBR":                          xBR
-                "xBR (no Edge Blending)":       xBRBinAlpha
-        duckstation_CropMode:
-            prompt:      CROP MODE
-            description: Changes how much of the image is cropped
-            choices:
-                "Off":                          "None"
-                "Only Overscan Area":           "Overscan"
-                "All Borders":                  "Borders"
-        duckstation_widescreen_hack:
-            prompt:      WIDESCREEN HACK
-            description: You must use a 16/9 RATIO and disable BEZEL
-            choices:
-                "Off":                          0
-                "On":                           1
-        duckstation_custom_textures:
-            prompt:      CUSTOM TEXTURES
-            description: Permit to use HD Texture Pack, preload use more RAM 
-            choices:
-                "Off":                   0
-                "Normal":                normal
-                "Preload":               preload
-        duckstation_rumble:
-            prompt:      RUMBLE
-            description: Activate vibration on supported controllers
-            choices:
-                "Off":                          0
-                "On":                           1
-        duckstation_digitalmode:
-            prompt:      DPAD TO JOYSTICK
-            description: Use your Joystick as a Dpad with Analog controllers
-            choices:
-                "Off":                          0
-                "On":                           1
-        duckstation_multitap:
-            prompt:      MULTITAP
-            description: Allows 5 or 8 max players support in games
-            choices:
-                "Off":                          Disabled
-                "Port 1":                       Port1Only
-                "Port 2":                       Port2Only
-                "Port 1+2":                     BothPorts
-        duckstation_Controller1:
-            prompt:      CONTROLLER 1 TYPE
-            description: Use DualShock type for games with Rumble mode
-            choices:
-                "None":                          None
-                "Digital Controller":            DigitalController
-                "Analog Controller (DualShock)": AnalogController
-                "Analog Joystick":               AnalogJoystick
-                "Namco GunCon (Rumble)":         NamcoGunCon
-                "PlayStation Mouse":             PlayStationMouse
-                "NeGcon (Rumble)":               NeGcon
-        duckstation_Controller2:
-            prompt:      CONTROLLER 2 TYPE
-            description: Use DualShock type for games with Rumble mode
-            choices:
-                "None":                          None
-                "Digital Controller":            DigitalController
-                "Analog Controller (DualShock)": AnalogController
-                "Analog Joystick":               AnalogJoystick
-                "Namco GunCon (Rumble)":         NamcoGunCon
-                "PlayStation Mouse":             PlayStationMouse
-                "NeGcon (Rumble)":               NeGcon
-
 flycast:
-  features: [ratio]
-
-fpinball:
   features: [ratio]
 
 fsuae:
   features: [ratio, padtokeyboard]
 
 hatari:
-  features: [padtokeyboard]
-  cfeatures:
-        model:
-            prompt:      MODEL
-            description: Machine model
-            choices:
-                "520 ST / AUTO":     520st_auto
-                "520 ST / TOS 1.00": 520st_100
-                "520 ST / TOS 1.02": 520st_102
-                "520 ST / TOS 1.04": 520st_104
-                "1040 STE / AUTO":   1040ste_auto
-                "1040 STE / 1.06":   1040ste_106
-                "1040 STE / 1.62":   1040ste_162
-                "Mega STE / AUTO":   megaste_auto
-                "Mega STE / 2.05":   megaste_205
-                "Mega STE / 2.06":   megaste_206
-        language:
-            prompt:      LANGUAGE
-            description: TOS languages
-            choices:
-                DE:                  de
-                ES:                  es
-                FR:                  fr
-                IT:                  it
-                NL:                  nl
-                RU:                  ru
-                SE:                  se
-                UK:                  uk
-                US:                  us
-        ram:
-            prompt:      RAM
-            description: RAM memory size
-            choices:
-                520K:                0
-                1M:                  1
-                2M:                  2
-                4M:                  4
+  features: []
 
 linapple:
   features: [ratio, padtokeyboard]
@@ -3260,273 +2209,77 @@ moonlight:
 
 mupen64plus:
   features: [ratio]
-  cfeatures:
-        mupen64plus_frameskip:
-            prompt:      FRAME SKIP [GL64MK2 ONLY]
-            description: Skip frames to improve performance (Smoothless)
-            choices:
-                "Off":                  0
-                "Autodetect":           automatic
-                "1":                    1
-                "2":                    2
-                "3":                    3
-                "4":                    4
-                "5":                    5
-        mupen64plus_Mipmapping:
-            prompt:      TEXTURES MIP-MAPPING (BLUR)
-            description: Smooths out textures on 3D objetcs
-            choices:
-                "Off":                  0
-                "nearest":              1
-                "bilinear":             2
-                "trilinear":            3
-        mupen64plus_Anisotropic:
-            prompt:      ANISOTROPIC FILTERING
-            description: Enhance perspective textures (use Mipmapping)
-            choices:
-                "Off":                  0
-                "2x":                   2
-                "4x":                   4
-                "8x":                   8
-                "16x":                  16
-        mupen64plus_AntiAliasing:
-            prompt:      ANTI-ALIASING (MSAA)
-            description: Smooth out jagged edges on 3D objetcs polygons
-            choices:
-                "Off":                  0
-                "2x":                   2
-                "4x":                   4
-                "8x":                   8
-                "16x":                  16
-        mupen64plus_TextureEnhancement:
-            prompt:      TEXTURE ENHANCEMENT (XBRZ) [RICE ONLY]
-            description: Scales up a nearest-neighbor version of the texture
-            choices:
-                "Off":                  0
-                "2X":                   1
-                "2XSAI":                2
-                "HQ2X":                 3
-                "LQ2X":                 4
-                "HQ4X":                 5
-                "Sharpen":              6
-                "Sharpen More":         7
-                "External":             8
-                "Mirrored":             9
-        mupen64plus_LoadHiResTextures:
-            prompt:      HIRES TEXTURES
-            description: Permit to use HD Texture Pack
-            choices:
-                "Off":                  "False"
-                "On":                   "True"
-        mupen64plus_DisableExtraMem:
-            prompt:      4MB EXPANSION RAM PACK
-            description: Disable may be necessary for some games
-            choices:
-                "Off":                  "False"
-                "On":                   "True"
 
 openbor:
-  features: []
   cfeatures:
-        ratio:
-            prompt:      SCREEN RATIO
-            description: Stretch games to Full Screen but distorted
-            choices:
-                "Normal":         0
-                "Stretch":        1
-        filter:
-            prompt:      VIDEO FILTER
-            description: Apply to achieve some kind of visual effect
-            choices:
-                "Simple 2x":      0
-                "Bilinear":       1
-                "2xSaI":          2
-                "Super 2xSaI":    3
-                "Super Eagle":    4
-                "Advance Mame2x": 5
-                "Lq2x":           6
-                "Hq2x":           7
-                "ScanLines":      8
-                "ScanLines TV":   9
-                "TV 2x":          10
-                "Dot Matrix":     11
+    ratio:
+      prompt:      SCREEN RATIO
+      description: Stretch games to Full Screen but distorted
+      choices:
+        "Normal":         0
+        "Stretch":        1
+    filter:
+      prompt:      VIDEO FILTER
+      description: Apply to achieve some kind of visual effect
+      choices:
+        "Simple 2x":      0
+        "Bilinear":       1
+        "2xSaI":          2
+        "Super 2xSaI":    3
+        "Super Eagle":    4
+        "Advance Mame2x": 5
+        "Lq2x":           6
+        "Hq2x":           7
+        "ScanLines":      8
+        "ScanLines TV":   9
+        "TV 2x":          10
+        "Dot Matrix":     11
 
 pcsx2:
-  features: [ratio]
+  features: [ratio, fullboot, internal_resolution]
   cfeatures:
-        gfxbackend:
-            prompt:      GRAPHICS BACKEND
-            description: Choose your graphics rendering
-            choices:
-                "OpenGL":      12
-                "Software":    13
-        fullboot:
-            prompt:      SHOW BIOS BOOTLOGO
-            description: Show BIOS animation when starting content
-            choices:
-                "Off":         0
-                "On":          1
-        internal_resolution:
-            prompt:      VIDEO RESOLUTION
-            description: Improve the fidelity of 3D models (unaffect 2D)
-            choices:
-                "1x 640x480":  1
-                "2x 720p":     2
-                "3x 1080p":    3
-                "4x 1440p 2K": 4
-                "5x 1620p 3K": 5
-                "6x 2160p 4K": 6
-                "7x 2880p 5K": 7
         anisotropic_filtering:
             prompt:      ANISOTROPIC FILTERING
             description: Enhance the quality with on perspective textures
             choices:
-                "Off":         0
-                "2x":          2
-                "4x":          4
-                "8x":          8
-                "16x":         16
+                "Off": 0
+                "2x":  2
+                "4x":  4
+                "8x":  8
+                "16x": 16
         skipdraw:
             prompt:      SKIPDRAW HACK
             description: Skip frames to improve performance (Smoothless)
             choices:
-                "Off":      0
-                "1":        1
-                "2":        2
-                "3":        3
-                "4":        4
-                "5":        5
+                "Off": 0
+                "1":   1
+                "2":   2
+                "3":   3
+                "4":   4
+                "5":   5
         align_sprite:
             prompt:      ALIGN SPRITE (HACK)
             description: Remove lines in Internal Resolution (Soul Calibur)
+            description: 
             choices:
-                "Off":      0
-                "On":       1
+                "Off": 0
+                "On":  1
         vsync:
             prompt:      VSYNC
             description: Fix the heavy screen tearing in games (heavy CPU)
             choices:
-                "Off":      0
-                "On":       1
-        EmuCore_EnableCheats:
-            prompt:      GAMES CHEATS
-            description: For cheating in games as with Action Replay
-            choices:
-                "Off":      disabled
-                "On":       enabled
-        EmuCore_EnableWideScreenPatches:
-            prompt:      WIDESCREEN PATCHES
-            description: You must use a 16/9 RATIO and disable BEZEL
-            choices:
-                "Off":      disabled
-                "On":       enabled
-        EmuCore_EnablePatches:
-            prompt:      AUTOMATIC GAMEFIXES
-            description: Selectively use specific tested fixes for games
-            choices:
-                "Off":      disabled
-                "On":       enabled
-        EmuCore_ManualPatches:
-            prompt:      MANUAL GAMEFIXES
-            description: They can cause compatibility or performance issues
-            choices:
-                "Off":                                               disabled
-                "VU Add hack - Fixes Tri-Ace games boot crash":      VuAddSubHack
-                "FPU Compare hack - For Digimon Rumble Arena 2":     FpuCompareHack
-                "FPU Multiply hack - For Tales of Destiny":          FpuMulHack
-                "FPU Negative Div hack - For Gundam Games":          FpuNegDivHack
-                "VU XGkick hack - For Eremental Gerad":              XgKickHack
-                "FFX videos fix - Fixes bad graphics overlay":       IPUWaitHack
-                "EE timing hack - Try if all else fails":            EETimingHack
-                "Skip MPEG hack - Skips videos/FMVs that freezes":   SkipMPEGHack
-                "OPH Flag hack - Try if game freeze on same frame":  OPHFlagHack
-                "Handle DMAC writes when it busy":                   DMABusyHack
-                "Simulate VIF1 FIFO read - Fix slow loading":        VIFFIFOHack
-                "Delay VIF1 Stalls - For SOCOM2 n Spy Hunter":       VIF1StallHack
-                "Enable the GIF FIFO - Wallace and Gromit, Dj Hero": GIFFIFOHack
-                "Preload TLB hack to avoid tlb miss on Goemon":      GoemonTlbHack
-                "VU I bit hack - Scarface The World is Yours":       ScarfaceIbit
-                "VU I bit hack - Crash Tag Team Racing":             CrashTagTeamRacingIbit
-                "VUO Kickstart to avoid sync problems with VU1":     VU0KickstartHack
-        multitap:
-            prompt:      MULTITAP
-            description: Allows 5 or 8 max players support in games
-            choices:
-                "Off":      disabled
-                "Port1":    port1
-                "Port2":    port2
-                "Port1+2":  port12
+                "Off": 0
+                "On":  1
 
 ppsspp:
-  features: [rewind, ratio]
+  features: [ratio, internal_resolution]
   cfeatures:
-#        gfxbackend:
-#            archs_include: [x86, x86_64, rpi4, odroidgoa]
-#            prompt:      GRAPHICS BACKEND
-#            description: Choose your graphics rendering
-#            choices:
-#                "OpenGL":               0 (OPENGL)
-#                "Vulkan":               3 (VULKAN)
-        internal_resolution:
-            prompt:      VIDEO RESOLUTION
-            description: Improve the fidelity of 3D models (unaffect 2D)
-            choices:
-                #"Automatic (1:1)":      0
-                "1x 480×272":           1
-                "2x 960x544":           2
-                "3x 720p":              3
-                "4x 1080p":             4
-                "5x 2400x1360":         5
-                "6x 1620p 3K":          6
-                "7x 3360x1904":         7
-                "8x 2160p 4K":          8
-                "9x 4320x2448":         9
-                "10x 4800x2720":        10
         frameskip:
             prompt:      FRAME SKIP
             description: Skip frames to improve performance (Smoothless)
             choices:
-                "Off":                  0
-                "Autodetect":           automatic
-                "1":                    1
-                "2":                    2
-                "3":                    3
-                "4":                    4
-                "5":                    5
-        texture_scaling_level:
-            prompt:      TEXTURES UPSCALING (XBRZ)
-            description: Upscaling textures resolution on 3D objetcs
-            choices:
-                "Off":                  1
-                "Automatic":            0
-                "2x":                   2
-                "3x":                   3
-                "4x":                   4
-                "5x":                   5
-        texture_scaling_type:
-            prompt:      TEXTURE ENHANCEMENT (XBRZ)
-            description: Scales up a nearest-neighbor version of the texture
-            choices:
-                "xBRZ":                 0
-                "Hybride":              1
-                "Bicubique":            2
-                "Hybride + Bicubique":  3
-        texture_deposterize:
-            prompt:      TEXTURE DEPOSTERIZE
-            description: Fix the bug that causes bands to appear in textures
-            choices:
-                "Off":                  False
-                "On":                   True
-        anisotropic_filtering:
-            prompt:      ANISOTROPIC FILTERING
-            description: Enhance the quality with on perspective textures
-            choices:
-                "Off":                  0
-                "2x":                   1
-                "4x":                   2
-                "8x":                   3
-                "16x":                  4
-
+                "Off": 0
+                "On":  1
 reicast:
   features: [ratio]
 
@@ -3549,71 +2302,10 @@ rpcs3:
 scummvm:
   features: [ratio, padtokeyboard]
 
+solarus:
+  features: []
+
 easyrpg:
-  features: []
-  cfeatures:
-        testplay:
-            prompt:      TEST PLAY
-            description: Enable debug menu and walk through walls button
-            choices:
-                "Off":                           0
-                "On":                            1
-        encoding:
-            prompt:      GAME REGION (ENCODING)
-            description: Needed by some games to use special characters
-            choices:
-                "Autodetect (Recommended)":      autodetect
-                "European (Western)":            1252
-                "European (Cent/East) [W-1250]": 1250
-                "Japanese [Shift-JIS]":          932
-                "Cyrillic [Windows-1251]":       1251
-                "Korean":                        949
-                "Chinese (Simplified)":          936
-                "Chinese (Traditional) [Big5]":  950
-                "Greek":                         1253
-                "Turkish":                       1254
-                "Baltic":                        1257
-
-redream:
-  features: []
-
-supermodel:
-  features: []
-  cfeatures:
-        engine3D:
-            prompt:      3D ENGINE
-            description: Enable legacy or new 3D engine. Choose legacy for older GPUs.
-            choices:
-                "Legacy3D": legacy3d
-                "New3D":    new3d
-        quadRendering:
-            prompt:      QUAD RENDERING
-            description: Enable proper quad rendering. For higher end systems.
-            choices:
-                "Off":      0
-                "On":       1
-        wideScreen:
-            prompt:      ENABLE WIDESCREEN
-            description: Enable widescreen may cause rendering issues
-            choices:
-                "Off":      0
-                "On":       1
-        crosshairs:
-            prompt:      CROSSHAIRS
-            description: Enable crosshairs in shooting games for appropriate players.
-            choices:
-                "None":     0
-                "P1 only":  1
-                "P2 only":  2
-                "P1 & P2":  3
-        forceFeedback:
-            prompt:      ENABLE FORCE FEEDBACK
-            description: Enable force feedback for supported controllers with Linux drivers.
-            choices:
-                "Off":      0
-                "On":       1
-
-cgenius:
   features: []
 
 redream:
@@ -3622,54 +2314,44 @@ redream:
 vice:
   features: [ratio, padtokeyboard]
 
-tsugaru:
-  features: []
-
 mame:
-  features: [decoration]
+  features: []
   cfeatures:
         video:
             prompt:      GRAPHICS BACKEND
             description: Choose your graphics rendering
             choices:
-                "BGFX":            bgfx
-                "Accel":           accel
-                "OpenGL":          opengl
+                "BGFX":          bgfx
+                "Accel":         accel
+                "OpenGL":        opengl
         bgfxbackend:
-            archs_include: [x86, x86_64, rpi4, odroidgoa]
+            archs_include: [x86, x86_64, rpi4]
             prompt:      BGFX BACKEND
             description: Choose your graphics API
             choices:
-                "MAME Detect":     automatic
-                "OpenGL":          opengl
-                "OpenGL ES":       gles
-                "Vulkan":          vulkan
-        bgfxshaders:
-            prompt:      BGFX VIDEO FILTER
-            description: Apply to achieve some kind of visual effect
-            choices:
-                "Off":             null
-                "Bilinear":        default
-                "CRT Geom":        crt-geom
-                "CRT Geom Deluxe": crt-geom-deluxe
-                "Super Eagle":     eagle
-                "HLSL":            hlsl
-                "HQ2X":            hq2x
-                "HQ3X":            hq3x
-                "HQ4X":            hq4x
-        switchres:
-            prompt:      CRT SWITCHRES
-            description: CRT monitor SwitchRes support
-            choices:
-                "Off":             0
-                "On":              1
+                "Automatic":     auto
+                "OpenGL":        opengl
+                "OpenGLES":      gles
+                "Vulkan":        vulkan
         rotation:
             prompt:      TATE MODE
             description: Rotating display to vertical mode rendering
             choices:
-                "Off":             null
-                "Rotate 90":       autoror
-                "Rotate 270":      autorol
+                "Disabled":      null
+                "Rotate 90":     autoror
+                "Rotate 270":    autorol
+        bgfxshaders:
+            prompt:      VIDEO FILTER
+            description: Apply to achieve some kind of visual effect
+            choices:
+                "None":          null
+                "CrtGeom":       crt-geom
+                "CrtGeomDeluxe": crt-geom-deluxe
+                "SuperEagle":    eagle
+                "HLSL":          hlsl
+                "HQ2X":          hq2x
+                "HQ3X":          hq3x
+                "HQ4X":          hq4x
 
 wine:
   features: [padtokeyboard]
@@ -3704,74 +2386,9 @@ wine:
             choices:
                 "Off": 0
                 "On":  1
-        mf:
-            prompt:      MF
-            description: Install Media Fondation
-            choices:
-                "Off": 0
-                "On":  1
         virtual_desktop:
             prompt:      VIRTUAL DESKTOP
             description: Define the resolution and a new dedicated window
             choices:
                 "Off": 0
                 "On":  1
-
-solarus:
-  features: []
-  cfeatures:
-        joystick:
-            prompt:      CONTROL CHOICE
-            description: Choose which pad to control your hero
-            choices:
-                "Joypad":           normal
-                "Left Joystick":    joystick1
-                "Right Joystick":   joystick2
-
-mugen:
-  features: [padtokeyboard]
-  cfeatures:
-        esync:
-            prompt:      ESYNC
-            description: Can increase performance for games that stress CPU
-            choices:
-                "Off": 0
-                "On":  1
-        fsync:
-            prompt:      FSYNC
-            description: Can improving frame rates and responsiveness
-            choices:
-                "Off": 0
-                "On":  1
-        pba:
-            prompt:      PBA
-            description: Vastly improving the speed of buffer maps
-            choices:
-                "Off": 0
-                "On":  1
-        virtual_desktop:
-            prompt:      VIRTUAL DESKTOP
-            description: Define the resolution and a new dedicated window
-            choices:
-                "Off": 0
-                "On":  1
-
-ruffle:
-  features: [padtokeyboard]
-
-lightspark:
-  features: [padtokeyboard]
-
-drastic:
-  features: []
-
-xemu:
-  features: []
-  cfeatures:
-        scaling:
-            prompt:      SCALING MODE
-            description: Stretch, scale or not your game screen
-            choices:
-                "Center":   center
-                "Scale":    scale
-                "Stretch":  stretch
