@@ -13,6 +13,7 @@ from generators.libretro.libretroGenerator import LibretroGenerator
 from generators.moonlight.moonlightGenerator import MoonlightGenerator
 from generators.mupen.mupenGenerator import MupenGenerator
 from generators.ppsspp.ppssppGenerator import PPSSPPGenerator
+from generators.reicast.reicastGenerator import ReicastGenerator
 from generators.flycast.flycastGenerator import FlycastGenerator
 from generators.dolphin.dolphinGenerator import DolphinGenerator
 from generators.pcsx2.pcsx2Generator import Pcsx2Generator
@@ -26,7 +27,6 @@ from generators.amiberry.amiberryGenerator import AmiberryGenerator
 from generators.citra.citraGenerator import CitraGenerator
 from generators.daphne.daphneGenerator import DaphneGenerator
 from generators.cannonball.cannonballGenerator import CannonballGenerator
-from generators.sdlpop.sdlpopGenerator import SdlPopGenerator
 from generators.openbor.openborGenerator import OpenborGenerator
 from generators.wine.wineGenerator import WineGenerator
 from generators.cemu.cemuGenerator import CemuGenerator
@@ -39,19 +39,6 @@ from generators.hatari.hatariGenerator import HatariGenerator
 from generators.solarus.solarusGenerator import SolarusGenerator
 from generators.easyrpg.easyrpgGenerator import EasyRPGGenerator
 from generators.redream.redreamGenerator import RedreamGenerator
-from generators.supermodel.supermodelGenerator import SupermodelGenerator
-from generators.xash3d_fwgs.xash3dFwgsGenerator import Xash3dFwgsGenerator
-from generators.tsugaru.tsugaruGenerator import TsugaruGenerator
-from generators.mugen.mugenGenerator import MugenGenerator
-from generators.fpinball.fpinballGenerator import FpinballGenerator
-from generators.lightspark.lightsparkGenerator import LightsparkGenerator
-from generators.ruffle.ruffleGenerator import RuffleGenerator
-from generators.duckstation.duckstationGenerator import DuckstationGenerator
-from generators.drastic.drasticGenerator import DrasticGenerator
-from generators.xemu.xemuGenerator import XemuGenerator
-from generators.cgenius.cgeniusGenerator import CGeniusGenerator
-from generators.flatpak.flatpakGenerator import FlatpakGenerator
-
 import controllersConfig as controllers
 import signal
 import batoceraFiles
@@ -73,6 +60,7 @@ generators = {
     'vice': ViceGenerator(),
     'fsuae': FsuaeGenerator(),
     'amiberry': AmiberryGenerator(),
+    'reicast': ReicastGenerator(),
     'flycast': FlycastGenerator(),
     'dolphin': DolphinGenerator(),
     'pcsx2': Pcsx2Generator(),
@@ -80,7 +68,6 @@ generators = {
     'citra' : CitraGenerator(),
     'daphne' : DaphneGenerator(),
     'cannonball' : CannonballGenerator(),
-    'sdlpop' : SdlPopGenerator(),
     'openbor' : OpenborGenerator(),
     'wine' : WineGenerator(),
     'cemu' : CemuGenerator(),
@@ -93,18 +80,6 @@ generators = {
     'solarus': SolarusGenerator(),
     'easyrpg': EasyRPGGenerator(),
     'redream': RedreamGenerator(),
-    'supermodel': SupermodelGenerator(),
-    'xash3d_fwgs': Xash3dFwgsGenerator(),
-    'tsugaru': TsugaruGenerator(),
-    'mugen': MugenGenerator(),
-    'fpinball': FpinballGenerator(),
-    'lightspark': LightsparkGenerator(),
-    'ruffle': RuffleGenerator(),
-    'duckstation': DuckstationGenerator(),
-    'drastic': DrasticGenerator(),
-    'xemu': XemuGenerator(),
-    'cgenius': CGeniusGenerator(),
-    'flatpak': FlatpakGenerator(),
 }
 
 def main(args, maxnbplayers):
@@ -129,16 +104,16 @@ def main(args, maxnbplayers):
     eslog.log("Running system: {}".format(systemName))
     system = Emulator(systemName, args.rom)
 
+    system.config["emulator-forced"] = False
+    system.config["core-forced"]     = False
     if args.emulator is not None:
         system.config["emulator"] = args.emulator
-        system.config["emulator-forced"] = True
+        system.config["emulator-forced"] = True # tip to indicated that the emulator was forced
     if args.core is not None:
         system.config["core"] = args.core
         system.config["core-forced"] = True
-    debugDisplay = system.config.copy()
-    if "retroachievements.password" in debugDisplay:
-        debugDisplay["retroachievements.password"] = "***"
-    eslog.debug("Settings: {}".format(debugDisplay))
+
+    eslog.debug("Settings: {}".format(system.config))
     if "emulator" in system.config and "core" in system.config:
         eslog.log("emulator: {}, core: {}".format(system.config["emulator"], system.config["core"]))
     else:
@@ -150,7 +125,6 @@ def main(args, maxnbplayers):
     systemMode = videoMode.getCurrentMode()
 
     resolutionChanged = False
-    mouseChanged = False
     exitCode = -1
     try:
         # lower the resolution if mode is auto
@@ -201,16 +175,6 @@ def main(args, maxnbplayers):
         if args.netplayport is not None:
             system.config["netplay.server.port"] = args.netplayport
 
-        # autosave arguments
-        if args.state_slot is not None:
-            system.config["state_slot"] = args.state_slot
-        if args.autosave is not None:
-            system.config["autosave"] = args.autosave
-
-        if generators[system.config['emulator']].getMouseMode(system.config):
-            mouseChanged = True
-            videoMode.changeMouse(True)
-
         # run a script before emulator starts
         callExternalScripts("/usr/share/batocera/configgen/scripts", "gameStart", [systemName, system.config['emulator'], effectiveCore, effectiveRom])
         callExternalScripts("/userdata/system/scripts", "gameStart", [systemName, system.config['emulator'], effectiveCore, effectiveRom])
@@ -218,11 +182,6 @@ def main(args, maxnbplayers):
         # run the emulator
         try:
             Evmapy.start(systemName, system.config['emulator'], effectiveCore, effectiveRom, playersControllers)
-            # change directory if wanted
-            executionDirectory = generators[system.config['emulator']].executionDirectory(system.config, effectiveRom)
-            if executionDirectory is not None:
-                os.chdir(executionDirectory)
-
             exitCode = runCommand(generators[system.config['emulator']].generate(system, args.rom, playersControllers, gameResolution))
         finally:
             Evmapy.stop()
@@ -238,13 +197,6 @@ def main(args, maxnbplayers):
                 videoMode.changeMode(systemMode)
             except Exception:
                 pass # don't fail
-
-        if mouseChanged:
-            try:
-                videoMode.changeMouse(False)
-            except Exception:
-                pass # don't fail
-
     # exit
     return exitCode
 
@@ -267,16 +219,13 @@ def runCommand(command):
     eslog.log("command: {}".format(str(command)))
     eslog.log("command: {}".format(str(command.array)))
     eslog.log("env: {}".format(str(command.env)))
+    proc = subprocess.Popen(command.array, env=command.env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     exitcode = -1
-    if command.array:
-        proc = subprocess.Popen(command.array, env=command.env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    else:
-        return exitcode
     try:
         out, err = proc.communicate()
         exitcode = proc.returncode
-        sys.stdout.write(out.decode())
-        sys.stderr.write(err.decode())
+        sys.stdout.write(out)
+        sys.stderr.write(err)
     except:
         eslog.log("emulator exited")
 
@@ -313,8 +262,6 @@ if __name__ == '__main__':
     parser.add_argument("-netplaypass", help="enable spectator mode", type=str, required=False)
     parser.add_argument("-netplayip", help="remote ip", type=str, required=False)
     parser.add_argument("-netplayport", help="remote port", type=str, required=False)
-    parser.add_argument("-state_slot", help="state slot", type=str, required=False)
-    parser.add_argument("-autosave", help="autosave", type=str, required=False)
 
     args = parser.parse_args()
     try:

@@ -3616,6 +3616,9 @@ supermodel:
 cgenius:
   features: []
 
+redream:
+  features: []
+
 vice:
   features: [ratio, padtokeyboard]
 
